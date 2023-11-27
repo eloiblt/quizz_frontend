@@ -1,42 +1,32 @@
-import { useContext, useEffect, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import { useContext, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, Outlet } from 'react-router-dom';
-import { AppContext } from './contexts/app.context';
 import { firstValueFrom, map } from 'rxjs';
+import { AppContext } from './contexts/app.context';
 
 function App() {
-  const [count, setCount] = useState(0);
   const { apiClient } = useContext(AppContext);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    (async function fetchData() {
+    (async () => {
       const results = await firstValueFrom(apiClient.ping().pipe(map(r => r.data)));
       console.log(results);
     })();
   }, [apiClient]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-      <Link to={`contacts/1`}>Your Name</Link>
+    <div className="app-container">
+      <h1>{t('title')}</h1>
+      <Link to={`contacts/1`}>Child</Link>
+
+      <h3>Current Language: {i18n.language}</h3>
+
+      <button type="button" onClick={() => i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr')}>
+        Change Language
+      </button>
       <Outlet />
-    </>
+    </div>
   );
 }
 
