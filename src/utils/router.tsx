@@ -1,10 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
-import Child from '../components/Child';
-import ErrorPage from '../components/ErrorPage';
-import Home from '../components/Home';
-import SignIn from '../components/SignIn';
-import SignUp from '../components/SignUp';
+import SignIn from '../components/Auth/SignIn';
+import SignUp from '../components/Auth/SignUp';
+import Home from '../components/Home/Home';
+import ErrorPage from '../components/Shared/ErrorPage';
 
 export const router = createBrowserRouter([
   {
@@ -17,8 +16,8 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'child/:id',
-        element: <Child />,
+        path: 'online',
+        element: 'Online play feature is coming !',
       },
       {
         path: 'sign-in',

@@ -1,2 +1,24 @@
 @import './reset';
 @import './font';
+
+.possible-answers {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+}
+
+.card {
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &.activate {
+        background-color: green;
+    }
+
+    &.error {
+        background-color: red;
+    }
+}

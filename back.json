@@ -1,0 +1,122 @@
+{
+    "results": [
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "General Knowledge",
+            "question": "Which of the following is an existing family in &quot;The Sims&quot;?",
+            "correct_answer": "The Goth Family",
+            "incorrect_answers": [
+                "The Family",
+                "The Simoleon Family",
+                "The Proud Family"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Video Games",
+            "question": "How many games in the Crash Bandicoot series were released on the original Playstation?",
+            "correct_answer": "5",
+            "incorrect_answers": [
+                "4",
+                "3",
+                "6"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Science: Gadgets",
+            "question": "Who patented a steam engine that produced continuous rotary motion?",
+            "correct_answer": "James Watt",
+            "incorrect_answers": [
+                "Nikola Tesla",
+                "Albert Einstein",
+                "Alessandro Volta"
+            ]
+        },
+        {
+            "type": "boolean",
+            "difficulty": "easy",
+            "category": "Geography",
+            "question": "Hungary is the only country in the world beginning with H.",
+            "correct_answer": "False",
+            "incorrect_answers": [
+                "True"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Geography",
+            "question": "How many timezones does Russia have?",
+            "correct_answer": "11",
+            "incorrect_answers": [
+                "6",
+                "24",
+                "16"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Sports",
+            "question": "Josh Mansour is part of what NRL team?",
+            "correct_answer": "Penrith Panthers",
+            "incorrect_answers": [
+                "Melbourne Storm",
+                "Sydney Roosters",
+                "North Queensland Cowboys"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Geography",
+            "question": "What island in the Canary Islands was the scene of one of the worst air disasters in history with the collision of two jumbo jets?",
+            "correct_answer": "Tenerife",
+            "incorrect_answers": [
+                "Fuerteventura",
+                "Gran Canaria",
+                "Maui"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Geography",
+            "question": "What is Canada&#039;s smallest province?",
+            "correct_answer": "Prince Edward Island",
+            "incorrect_answers": [
+                "New Brunswick",
+                "Nova Scotia",
+                "Yukon"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Video Games",
+            "question": "Which of the following weapons in &quot;Counter-Strike: Global Offensive&quot; does not have a right-click function?",
+            "correct_answer": "XM1014",
+            "incorrect_answers": [
+                "SG553",
+                "R8 Revolver",
+                "USP-S"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Video Games",
+            "question": "&quot;Exile&quot; and &quot;Revelations&quot; were the third and fourth installments of which PC game series?",
+            "correct_answer": "Myst",
+            "incorrect_answers": [
+                "Shivers",
+                "Doom",
+                "Tropico"
+            ]
+        }
+    ]
+}

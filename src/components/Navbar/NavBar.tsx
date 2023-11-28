@@ -7,19 +7,28 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
+import Link from '@mui/material/Link';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link as RouterLink } from 'react-router-dom';
 import ColorThemeSwitcher from './ColorThemeSwitcher';
 import LanguageSwitcher from './LanguageSwitcher';
-import { useTheme } from '@mui/material/styles';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+interface MenuLink {
+  name: string;
+  route: string;
+}
+
+const pages = [
+  { name: 'Jouer en local', route: '/' } as MenuLink,
+  { name: 'Jouer en ligne', route: '/online' } as MenuLink,
+];
 
 export default function NavBar() {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -28,8 +37,8 @@ export default function NavBar() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   function handleOpenNavMenu(event: React.MouseEvent<HTMLElement>) {
-        setAnchorElNav(event.currentTarget);
-    }
+    setAnchorElNav(event.currentTarget);
+  }
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -52,25 +61,29 @@ export default function NavBar() {
     <AppBar position="static">
       <Container maxWidth={false}>
         <Toolbar disableGutters>
-          {logged}
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+          <Link
+            component={RouterLink}
+            to="/"
+            sx={{ display: 'flex', color: 'inherit', textDecoration: 'none', alignItems: 'center' }}
           >
-            LOGO
-          </Typography>
+            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <Typography
+              variant="h6"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              Quizz
+            </Typography>
+          </Link>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -101,8 +114,18 @@ export default function NavBar() {
               }}
             >
               {pages.map(page => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Link
+                    to={page.route}
+                    component={NavLink}
+                    sx={{
+                      '&.active': {
+                        color: 'red',
+                      },
+                    }}
+                  >
+                    {page.name}
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -128,9 +151,20 @@ export default function NavBar() {
           </Typography>
           <Box sx={{ flex: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map(page => (
-              <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-                {page}
-              </Button>
+              <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                <Link
+                  to={page.route}
+                  component={NavLink}
+                  sx={{
+                    textDecoration: 'none',
+                    '&.active': {
+                      color: 'secondary.main',
+                    },
+                  }}
+                >
+                  {page.name}
+                </Link>
+              </MenuItem>
             ))}
           </Box>
 
@@ -138,12 +172,16 @@ export default function NavBar() {
           <ColorThemeSwitcher />
 
           {!logged && (
-            <Stack sx={{ml: 2}} direction="row" spacing={1}>
-              <Link to={`sign-in`}>
-                <Button variant="contained" color="secondary">Sign In</Button>
+            <Stack sx={{ ml: 2 }} direction="row" spacing={1}>
+              <Link component={RouterLink} to={`/sign-in`}>
+                <Button variant="contained" color="secondary">
+                  Sign In
+                </Button>
               </Link>
-              <Link to={`sign-up`}>
-                <Button variant="contained" color={isDarkMode ? 'primary' : 'inherit'}>Sign Up</Button>
+              <Link component={RouterLink} to={`/sign-up`}>
+                <Button variant="contained" color={isDarkMode ? 'primary' : 'inherit'}>
+                  Sign Up
+                </Button>
               </Link>
             </Stack>
           )}
