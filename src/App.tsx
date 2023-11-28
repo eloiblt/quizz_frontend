@@ -1,33 +1,47 @@
-import { useContext, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link, Outlet } from 'react-router-dom';
-import { firstValueFrom, map } from 'rxjs';
-import { AppContext } from './contexts/app.context';
+import { CssBaseline, ThemeProvider, createTheme, useMediaQuery } from '@mui/material';
+import { useMemo, useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { AppContext, AppContextModel } from './contexts/app.context';
+import { ColorThemeContext, ColorThemeContextModel } from './contexts/color-theme.context';
+import ApiClient from './services/api.service';
 
-function App() {
-  const { apiClient } = useContext(AppContext);
-  const { t, i18n } = useTranslation();
+export default function App() {
+  const appContext = {
+    apiClient: new ApiClient(import.meta.env.VITE_API_URL, ''),
+  } as AppContextModel;
 
-  useEffect(() => {
-    (async () => {
-      const results = await firstValueFrom(apiClient.ping().pipe(map(r => r.data)));
-      console.log(results);
-    })();
-  }, [apiClient]);
+  const [themeColor, setThemeColor] = useState<'light' | 'dark'>(
+    useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light'
+  );
+
+  const colorThemeContext = useMemo(
+    () =>
+      ({
+        toggleColorMode: () => {
+          setThemeColor(prevColorTheme => (prevColorTheme === 'light' ? 'dark' : 'light'));
+        },
+      }) as ColorThemeContextModel,
+    []
+  );
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: themeColor,
+        },
+      }),
+    [themeColor]
+  );
 
   return (
-    <div className="app-container">
-      <h1>{t('title')}</h1>
-      <Link to={`contacts/1`}>Child</Link>
-
-      <h3>Current Language: {i18n.language}</h3>
-
-      <button type="button" onClick={() => i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr')}>
-        Change Language
-      </button>
-      <Outlet />
-    </div>
+    <AppContext.Provider value={appContext}>
+      <ColorThemeContext.Provider value={colorThemeContext}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Outlet />
+        </ThemeProvider>
+      </ColorThemeContext.Provider>
+    </AppContext.Provider>
   );
 }
-
-export default App;
